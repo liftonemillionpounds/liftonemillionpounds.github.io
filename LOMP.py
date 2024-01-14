@@ -65,13 +65,10 @@ def main():
 
     names = np.array(names)
     pounds = np.array(pounds)
-    print(names)
-    print(pounds)
 
     test_names = np.unique(names)
     percentiles = []
     for t in test_names:
-        print(pounds[names == t])
         percentiles.append(np.sum(pounds[names == t]))
     percentiles = np.array(percentiles)
   
