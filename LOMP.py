@@ -61,14 +61,17 @@ def main():
     for row in values:
       # Print columns A and E, which correspond to indices 0 and 4.
       names.append(row[0])
-      pounds.append(row[1])
+      pounds.append(float(row[1]))
 
     names = np.array(names)
     pounds = np.array(pounds)
+    print(names)
+    print(pounds)
 
     test_names = np.unique(names)
     percentiles = []
     for t in test_names:
+        print(pounds[names == t])
         percentiles.append(np.sum(pounds[names == t]))
     percentiles = np.array(percentiles)
   
