@@ -56,10 +56,70 @@ def main():
       print("No data found.")
       return
 
-    
+    names = []
+    pounds = []
     for row in values:
       # Print columns A and E, which correspond to indices 0 and 4.
-      print(f"{row[0]}, {row[1]}")
+      names.append(row[0])
+      pounds.append(row[1])
+
+    names = np.array(names)
+    pounds = np.array(pounds)
+
+    test_names = np.unique(names)
+    percentiles = []
+    for t in test_names:
+        percentiles.append(np.sum(pounds[names == t]))
+    percentiles = np.array(percentiles)
+  
+    fig, ax1 = plt.subplots(figsize=(9, 6), layout='constrained')
+    fig.canvas.manager.set_window_title('')
+    rects = ax1.barh(test_names, percentiles, align='center', height=0.5)
+    large_percentiles = []
+    small_percentiles = []
+    for p in percentiles:
+        if p < 100000:
+            large_percentiles.append('')
+            small_percentiles.append(p)
+        else:
+            large_percentiles.append(p)
+            small_percentiles.append('')
+
+    ax1.bar_label(rects, small_percentiles,
+                    padding=5, color='black', fontweight='bold')
+    ax1.bar_label(rects, large_percentiles,
+                    padding=-50, color='white', fontweight='bold')
+
+    ax1.set_xlim([0, 1000000])
+
+    xlabels = []
+    for x in np.arange(0,1100000,100000):
+        xlabels.append(str(x))
+
+    ax1.set_xticks(np.arange(0,1100000,100000),
+        labels = (xlabels))
+    ax1.xaxis.grid(True, linestyle='--', which='major',
+                    color='grey', alpha=.25)
+    ax1.axvline(500000, color='grey', alpha=0.25)  # median position
+
+
+    # Set the right-hand Y-axis ticks and labels
+    ax2 = ax1.twinx()
+    # Set equal limits on both yaxis so that the ticks line up
+    ax2.set_ylim(ax1.get_ylim())
+    # Set the tick locations and labels
+    percentage_completion = np.array(percentiles)/10000.
+    percent_labels = []
+    for p in percentage_completion:
+        label = '{:.2f} %'.format(p)
+        percent_labels.append(label)
+
+    ax2.set_yticks(
+        np.arange(len(percentiles)),
+        labels = (percent_labels))
+
+    ax2.set_ylabel('Percentage Completion')
+    plt.savefig("LOMP.png", dpi = 300)
   except HttpError as err:
     print(err)
 
