@@ -59,9 +59,11 @@ def main():
     names = []
     pounds = []
     for row in values:
-      # Print columns A and E, which correspond to indices 0 and 4.
-      names.append(row[0])
-      pounds.append(float(row[1]))
+      try:# Print columns A and E, which correspond to indices 0 and 4.
+        names.append(row[0])
+        pounds.append(float(row[1]))
+      except:
+         continue
 
     names = np.array(names)
     pounds = np.array(pounds)
