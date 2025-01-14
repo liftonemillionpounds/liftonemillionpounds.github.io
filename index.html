@@ -4,13 +4,30 @@
     <meta charset="utf-8">
     <title>LOMP</title>
     <link rel="shortcut icon" type="image/png" href="favicon_db.png">
+    <style>
+      .image-container {
+          display: flex;
+          justify-content: center; /* Center the images horizontally */
+          gap: 20px; /* Space between the images */
+      }
+      .image-container img {
+          max-width: 45%; /* Adjust the size of the images */
+          height: auto; /* Maintain aspect ratio */
+          border: 2px solid #ccc; /* Optional border */
+          border-radius: 8px; /* Rounded corners */
+      }
+    </style>
   </head>
   <body>
     <h1>Lift One Million Pounds</h1>
     <p>Current Progress!</p>
-    <img src="LOMP.png" width="640" alt="Current Progress of Members">
+    <div class="image-container">
+      <img src="LOMP.png" alt="Image 1">
+      <img src="pie.png" alt="Image 2">
+    </div>
+    
   </body>
-  <div>
+  </div>
     <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSecfQiPlHvJMud7o1b-zIAmotYkLhs9DaeYysPLk2NA-EyAzQ/viewform?embedded=true" width="640" height="800" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
   </div>
 </html>
